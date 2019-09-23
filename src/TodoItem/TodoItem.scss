@@ -1,0 +1,6 @@
+.todo-item {
+    &--completed {
+        color: yellow;
+        text-decoration: line-through;
+    }
+}
