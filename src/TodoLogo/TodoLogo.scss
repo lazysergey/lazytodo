@@ -1,0 +1,44 @@
+.todo-logo {
+    margin-bottom: 20px;
+    height: 70px;
+
+    .cls-1 {
+        stroke-dasharray: 480;
+
+
+        &.animate-fill {
+            animation: fill 2s forwards linear;
+            stroke-dashoffset: 480;
+            fill: transparent;
+            stroke: #09d3ac;
+
+            @keyframes fill {
+                100% {
+                    stroke-dashoffset: 0;
+                    fill: #09d3ac;
+                    stroke: transparent;
+                }
+            }
+        }
+
+        &.animate-unfill {
+            animation: unfill 2s forwards linear;
+            stroke-dashoffset: 0;
+            fill: #09d3ac;
+            stroke: transparent;
+
+            @keyframes unfill {
+                100% {
+                    fill: transparent;
+                    stroke: #09d3ac;
+                    stroke-dashoffset: 480;
+
+
+                }
+            }
+        }
+    }
+
+
+
+}
