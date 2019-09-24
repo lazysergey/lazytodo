@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:3334'
+export const BASE_URL = 'http://localhost:3334/todo/'

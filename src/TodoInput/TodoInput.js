@@ -59,21 +59,23 @@ export class TodoInput extends PureComponent {
             isSending ? 'todo-input--sending' : null
         ].filter(c => c).join(' ');
 
-        return <div className="todo-input__wrapper">
-            <input
-                placeholder='Add new task...'
-                type='text'
-                className={className}
-                value={value}
-                onKeyDown={this.handleOnKeyDown}
-                onChange={this.handleOnChange}
-                disabled={isSending}
-            />
-            <button
-                className="todo-input__button"
-                onClick={this.handleButtonClick}>
-                +
+        return (
+            <div className="todo-input__wrapper">
+                <input
+                    placeholder='Add new task...'
+                    type='text'
+                    className={className}
+                    value={value}
+                    onKeyDown={this.handleOnKeyDown}
+                    onChange={this.handleOnChange}
+                    disabled={isSending}
+                />
+                <button
+                    className="todo-input__button"
+                    onClick={this.handleButtonClick}>
+                    +
             </button>
-        </div>
+            </div>
+        )
     }
 }

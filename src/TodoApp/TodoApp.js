@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React, { Component } from 'react';
-import { BASE_URL } from './constants';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoInput } from '../TodoInput/TodoInput';
 import { TodoControls } from '../TodoControls/TodoControls';
@@ -8,6 +6,7 @@ import { ProgressIndicator } from '../ProgressIndicator/ProgressIndicator';
 import './TodoApp.scss';
 import { TodoError } from '../TodoError/TodoError';
 import { TodoLogo } from '../TodoLogo/TodoLogo';
+import { http } from './httpService';
 
 export class TodoApp extends Component {
   state = {
@@ -17,21 +16,17 @@ export class TodoApp extends Component {
   }
 
   componentDidMount() {
-    this.httpGetAllTodos().then(todos => {
-      this.setState({
-        todosInitial: todos.sort((t1, t2) => t1.date - t2.date)
-      }, this.cloneInitialTodosToState)
-    });
-  }
-
-  httpGetAllTodos = () => {
-    return axios.get(`${BASE_URL}/todo/`)
-      .then(({ data }) => data)
+    http.getAll()
+      .then(todos => {
+        this.setState({
+          todosInitial: todos.sort((t1, t2) => t1.date - t2.date)
+        }, this.cloneInitialTodosToState)
+      })
       .catch(e => this.httpHandleError(e));
   }
 
   handleDelete = (todoItem) => () => {
-    this.httpDeleteTodoItem(todoItem)
+    http.deleteItem(todoItem)
       .then(data => {
         this.setState(({ todos }) => ({
           todosInitial: todos.filter(ti => ti.id !== todoItem.id)
@@ -40,26 +35,11 @@ export class TodoApp extends Component {
       .catch(e => this.httpHandleError(e));
   }
 
-  httpDeleteTodoItem = (todoItem) => {
-    return axios.delete(`${BASE_URL}/todo/${todoItem.id}`)
-      .catch(e => this.httpHandleError(e));
-  }
-
-  handleUpdate = (todoItem) => () => {
-    return this.httpPatchTodoItem(todoItem);
-  }
-
-  httpPatchTodoItem = (todoItem) => {
-    return axios.patch(`${BASE_URL}/todo/${todoItem.id}`, todoItem)
-      .then(({ data }) => data)
-      .catch(e => this.httpHandleError(e))
-  }
-
   handleCompleteToggle = (todoItem) => () => {
     todoItem.completed = !todoItem.completed;
-    return this.httpPatchTodoItem(todoItem)
+    return http.patchItem(todoItem)
       .then(updatedTodoItem => {
-        this.setState(({ todos }) => ({ odosInitial: todos.map(todoItem => todoItem.id === updatedTodoItem.id ? updatedTodoItem : todoItem) }), this.cloneInitialTodosToState)
+        this.setState(({ todos }) => ({ todosInitial: todos.map(todoItem => todoItem.id === updatedTodoItem.id ? updatedTodoItem : todoItem) }), this.cloneInitialTodosToState)
       });
   }
 
@@ -68,14 +48,11 @@ export class TodoApp extends Component {
   }
 
   addNewTodo = (value) => {
-    return axios.post(
-      `${BASE_URL}/todo/`,
-      {
-        name: value,
-        date: Date.now(),
-        listId: this.state.listId
-      }
-    )
+    return http.addItem({
+      name: value,
+      date: Date.now(),
+      listId: this.state.listId
+    })
       .then(({ data: newTodo }) => {
         this.setState(({ todos }) => ({
           todosInitial: [...todos, newTodo]
@@ -92,12 +69,10 @@ export class TodoApp extends Component {
 
   setAllCompleted = (isCompleted) => () => {
     Promise.all(
-      this.state.todos.map(todoItem => this.httpPatchTodoItem(
-        {
-          ...todoItem,
-          completed: isCompleted
-        }
-      )))
+      this.state.todos.map(todoItem => http.patchItem({
+        ...todoItem,
+        completed: isCompleted
+      })))
       .then(
         newtodos => {
           this.setState({
@@ -120,7 +95,7 @@ export class TodoApp extends Component {
   }
 
   render() {
-    const { todos } = this.state;
+    const { todos, todosInitial: {length: todosInitialLength} } = this.state;
     return (
       <div className="todo-react-app">
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
@@ -132,9 +107,9 @@ export class TodoApp extends Component {
         />
         <TodoList
           handleDelete={this.handleDelete}
-          handleUpdate={this.handleUpdate}
           handleCompleteToggle={this.handleCompleteToggle}
           todos={todos}
+          loaded={!!todosInitialLength}
         />
         <div className="todo-react-app__controls">
           <TodoControls
@@ -150,10 +125,7 @@ export class TodoApp extends Component {
             todos={todos}
           />
         </div>
-
       </div>
     )
   }
 };
-
-//TODO: add prop types
