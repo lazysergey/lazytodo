@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import './TodoInput.scss';
 
 export class TodoInput extends PureComponent {
-    isSending = false;
     state = {
-        value: ''
+        value: '',
+        isSending: false
     }
 
     handleOnChange = (e) => {
@@ -15,31 +15,27 @@ export class TodoInput extends PureComponent {
     }
 
     handleOnKeyDown = (e) => {
-        if (this.isSending) {
-            return;
-        }
+        if (this.state.isSending) return null;
         if (e.nativeEvent.code === "Enter") {
             this.addNewTodo();
         }
     }
 
     handleButtonClick = () => {
-        if (this.isSending) {
-            return;
-        }
+        if (this.state.isSending) return null;
         this.addNewTodo();
     }
 
     addNewTodo = () => {
         const { value } = this.state;
-        if (!value) {
-            return;
-        }
-        this.isSending = true;
+        if (!value) return null;
+        this.setState({
+            isSending: true
+        })
+
         return this.props.addNewTodo(value)
             .then(_ => {
-                this.isSending = false;
-                this.setState({ value: '' });
+                this.setState({ value: '', isSending: false });
             })
             .catch(error => {
 
@@ -56,15 +52,22 @@ export class TodoInput extends PureComponent {
     }
 
     render() {
-        const { hasError, value } = this.state;
+        const { hasError, value, isSending } = this.state;
+        const className = [
+            'todo-input',
+            hasError ? 'todo-input--error' : null,
+            isSending ? 'todo-input--sending' : null
+        ].filter(c => c).join(' ');
+
         return <div className="todo-input__wrapper">
             <input
-                placeholder='Add new todo'
+                placeholder='Add new task...'
                 type='text'
-                className={`todo-input ${hasError ? 'todo-input--error' : ''}`}
+                className={className}
                 value={value}
                 onKeyDown={this.handleOnKeyDown}
                 onChange={this.handleOnChange}
+                disabled={isSending}
             />
             <button
                 className="todo-input__button"

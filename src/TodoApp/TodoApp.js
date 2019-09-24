@@ -1,26 +1,27 @@
 import axios from 'axios';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { BASE_URL } from './constants';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoInput } from '../TodoInput/TodoInput';
 import { TodoControls } from '../TodoControls/TodoControls';
-import logo from './../logo.svg';
 import { ProgressIndicator } from '../ProgressIndicator/ProgressIndicator';
 import './TodoApp.scss';
 import { TodoError } from '../TodoError/TodoError';
+import { TodoLogo } from '../TodoLogo/TodoLogo';
 
-export class TodoApp extends PureComponent {
+export class TodoApp extends Component {
   state = {
-    todoArray: [],
+    todos: [],
+    todosInitial: [],
     listId: 1,
   }
 
   componentDidMount() {
-    this.httpGetAllTodos().then(todos => this.setState(
-      {
-        todoArray: todos.sort((t1, t2) => t1.date - t2.date),
-      }
-    ));
+    this.httpGetAllTodos().then(todos => {
+      this.setState({
+        todosInitial: todos.sort((t1, t2) => t1.date - t2.date)
+      }, this.cloneInitialTodosToState)
+    });
   }
 
   httpGetAllTodos = () => {
@@ -31,11 +32,11 @@ export class TodoApp extends PureComponent {
 
   handleDelete = (todoItem) => () => {
     this.httpDeleteTodoItem(todoItem)
-      .then(data => this.setState(({ todoArray }) => (
-        {
-          todoArray: todoArray.filter(ti => ti.id !== todoItem.id)
-        }
-      )))
+      .then(data => {
+        this.setState(({ todos }) => ({
+          todosInitial: todos.filter(ti => ti.id !== todoItem.id)
+        }), this.cloneInitialTodosToState);
+      })
       .catch(e => this.httpHandleError(e));
   }
 
@@ -58,7 +59,7 @@ export class TodoApp extends PureComponent {
     todoItem.completed = !todoItem.completed;
     return this.httpPatchTodoItem(todoItem)
       .then(updatedTodoItem => {
-        this.setState({ todoArray: this.state.todoArray.map(todoItem => todoItem.id === updatedTodoItem.id ? updatedTodoItem : todoItem) })
+        this.setState(({ todos }) => ({ odosInitial: todos.map(todoItem => todoItem.id === updatedTodoItem.id ? updatedTodoItem : todoItem) }), this.cloneInitialTodosToState)
       });
   }
 
@@ -76,65 +77,55 @@ export class TodoApp extends PureComponent {
       }
     )
       .then(({ data: newTodo }) => {
-        this.setState(({ todoArray }) => (
-          {
-            todoArray: [...todoArray, newTodo]
-          }
-        ))
+        this.setState(({ todos }) => ({
+          todosInitial: [...todos, newTodo]
+        }), this.cloneInitialTodosToState)
       })
       .catch(e => this.httpHandleError(e));
   }
 
+  cloneInitialTodosToState = () => {
+    this.setState(({ todosInitial }) => ({
+      todos: [...todosInitial]
+    }))
+  }
+
   setAllCompleted = (isCompleted) => () => {
     Promise.all(
-      this.state.todoArray.map(todoItem => this.httpPatchTodoItem(
+      this.state.todos.map(todoItem => this.httpPatchTodoItem(
         {
           ...todoItem,
           completed: isCompleted
         }
       )))
       .then(
-        newTodoArray => {
+        newtodos => {
           this.setState({
-            todoArray: newTodoArray
-          })
+            todosInitial: newtodos
+          }, this.cloneInitialTodosToState)
         }
       )
   }
 
-  handleShowAll = () => {
-    this.httpGetAllTodos()
-      .then(
-        todos => this.setState({
-          todoArray: todos
-        })
-      )
-  }
   handleShowCompleted = () => {
-    this.httpGetAllTodos()
-      .then(
-        todos => this.setState({
-          todoArray: todos.filter(t => t.completed)
-        })
-      )
+    this.setState(({ todosInitial }) => ({
+      todos: todosInitial.filter(todo => todo.completed)
+    }))
   }
-  handleShowIncomplete = () => {
-    this.httpGetAllTodos()
-      .then(
-        todos => this.setState({
-          todoArray: todos.filter(t => !t.completed)
-        })
-      )
-  }
-  render() {
-    // return todoArray.length && this.todoArray.map(t )
-    const { todoArray } = this.state;
 
+  handleShowIncomplete = () => {
+    this.setState(({ todosInitial }) => ({
+      todos: todosInitial.filter(todo => !todo.completed)
+    }))
+  }
+
+  render() {
+    const { todos } = this.state;
     return (
       <div className="todo-react-app">
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
         <div className="todo-react-app__header">
-          <img width="75" alt="logo" src={logo} />
+          <TodoLogo todos={this.state.todos} />
         </div>
         <TodoInput
           addNewTodo={this.addNewTodo}
@@ -143,12 +134,12 @@ export class TodoApp extends PureComponent {
           handleDelete={this.handleDelete}
           handleUpdate={this.handleUpdate}
           handleCompleteToggle={this.handleCompleteToggle}
-          todoArray={todoArray}
+          todos={todos}
         />
         <div className="todo-react-app__controls">
           <TodoControls
-            todoArray={todoArray}
-            handleShowAll={this.handleShowAll}
+            todos={todos}
+            handleShowAll={this.cloneInitialTodosToState}
             handleShowCompleted={this.handleShowCompleted}
             handleShowIncomplete={this.handleShowIncomplete}
             setAllCompleted={this.setAllCompleted}
@@ -156,7 +147,7 @@ export class TodoApp extends PureComponent {
         </div>
         <div className="todo-react-app__footer">
           <ProgressIndicator
-            todoArray={todoArray}
+            todos={todos}
           />
         </div>
 
