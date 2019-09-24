@@ -1,27 +1,21 @@
 import { TodoItem } from './../TodoItem/TodoItem';
-import React, { PureComponent } from './../../node_modules/react';
+import React from 'react';
 
-export class TodoList extends PureComponent {
-
-    // constructor(props) {
-    //     super(props);
-    // }
-
-    render() {
-        // this.setState({todoArray: {...this.state.todoArray}.map(t => t.active = true)})
-        if (!this.props.todoArray.length) {
-            return <div>Loading...</div>;
-        }
-        return this.props.todoArray.map((todoItem) =>
-            <TodoItem
-                key={todoItem.id}
-                todoItem={todoItem}
-                handleDelete={this.props.handleDelete(todoItem)}
-                handleComplete={this.props.handleComplete(todoItem)}
-                handleUpdate={this.props.handleUpdate(todoItem)}
-                // handleComplete={() => { this.props.handleComplete(todoItem) }}
-            />
-        )//TODO: define prop types
+export const TodoList = ({ todoArray, handleDelete, handleCompleteToggle }) => {
+    if (!todoArray.length) {
+        return <div>Loading...</div>;
     }
+    return <div className="todo-list">
+        {
+            todoArray.map((todoItem) =>
+                <TodoItem
+                    key={todoItem.id}
+                    todoItem={todoItem}
+                    handleDelete={handleDelete(todoItem)}
+                    handleCompleteToggle={handleCompleteToggle(todoItem)}
+                />
+            )
+        }
+    </div>
 
 }
