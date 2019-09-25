@@ -11,13 +11,10 @@
     font-size: 16px;
     margin-bottom: 20px;
     box-shadow: 0 0 0 1px #09d3ac;
-    // box-shadow: 0 0 0 1px var(--accent-color);
     transition: box-shadow .4s ease;
 
     &::-webkit-input-placeholder {
         color: #09d3ac70;
-        // color: var(--accent-color);
-        // opacity: 0.45;
     }
 
     &--sending {

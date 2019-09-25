@@ -98,7 +98,7 @@ export class TodoApp extends Component {
   render() {
     const { todos, todosInitial: { length: todosInitialLength } } = this.state;
     return (
-      <div className="todo-react-app" style={{ '--accent-color': this.state.hasError ? '#f11114' : '#13ecda' }}  >
+      <div className="todo-react-app">
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
         <a href="https://www.npmjs.com/package/json-server" className="todo-react-app__delay-info">api_delay: <strong>1100ms</strong></a>
         <div className="todo-react-app__header">
