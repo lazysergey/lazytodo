@@ -100,7 +100,6 @@ export class TodoApp extends Component {
     return (
       <div className="todo-react-app">
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
-        <a href="https://www.npmjs.com/package/json-server" className="todo-react-app__delay-info">api_delay: <strong>1100ms</strong></a>
         <div className="todo-react-app__header">
           <TodoLogo todos={this.state.todos} />
         </div>

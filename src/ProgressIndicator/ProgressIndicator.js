@@ -7,8 +7,8 @@ export const ProgressIndicator = ({ todos }) => {
     const allCount = todos.length;
     const progress = completedCount / allCount;
     const hue = {
-        from: 160,
-        to: 220
+        from: 170,
+        to: 200
     }
     const color = `hsl(${hue.from + progress * (hue.to - hue.from)}, 75%, 50%)`;
     const svgStrokeStyle = progress ? { strokeDashoffset: 145 - progress * 145 } : null;
