@@ -12,8 +12,7 @@
     }
 
     &--completed {
-        color: #5471ad;
-        // opacity: 0.3;
+        color: hsla(195, 85%, 50%, 1);
         text-decoration: line-through;
     }
 
@@ -24,6 +23,7 @@
     &__delete {
         right: 0;
         font-size: 14px;
+        user-select: none;
     }
 
     &__title {
