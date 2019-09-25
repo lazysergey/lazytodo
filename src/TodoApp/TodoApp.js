@@ -12,7 +12,7 @@ export class TodoApp extends Component {
   state = {
     todos: [],
     todosInitial: [],
-    listId: 1,
+    filteredBy: 'all'
   }
 
   componentDidMount() {
@@ -51,12 +51,11 @@ export class TodoApp extends Component {
     return http.addItem({
       name: value,
       date: Date.now(),
-      listId: this.state.listId,
       completed: false
     })
       .then(({ data: newTodo }) => {
-        this.setState(({ todos }) => ({
-          todosInitial: [...todos, newTodo]
+        this.setState(({ todosInitial }) => ({
+          todosInitial: [...todosInitial, newTodo]
         }), this.cloneInitialTodosToState)
       })
       .catch(e => this.httpHandleError(e));
@@ -64,13 +63,14 @@ export class TodoApp extends Component {
 
   cloneInitialTodosToState = () => {
     this.setState(({ todosInitial }) => ({
-      todos: [...todosInitial]
-    }))
+      todos: [...todosInitial],
+      filteredBy: 'all'
+    }));
   }
 
   setAllCompleted = (isCompleted) => () => {
     Promise.all(
-      this.state.todos.map(todoItem => http.patchItem({
+      this.state.todosInitial.map(todoItem => http.patchItem({
         ...todoItem,
         completed: isCompleted
       })))
@@ -85,18 +85,20 @@ export class TodoApp extends Component {
 
   handleShowCompleted = () => {
     this.setState(({ todosInitial }) => ({
-      todos: todosInitial.filter(todo => todo.completed)
+      todos: todosInitial.filter(todo => todo.completed),
+      filteredBy: 'completed'
     }))
   }
 
   handleShowIncomplete = () => {
     this.setState(({ todosInitial }) => ({
-      todos: todosInitial.filter(todo => !todo.completed)
+      todos: todosInitial.filter(todo => !todo.completed),
+      filteredBy: 'incomplete'
     }))
   }
 
   render() {
-    const { todos, todosInitial: { length: todosInitialLength } } = this.state;
+    const { todos, todosInitial: { length: todosInitialLength }, filteredBy } = this.state;
     return (
       <div className="todo-react-app">
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
@@ -115,6 +117,7 @@ export class TodoApp extends Component {
         <div className="todo-react-app__controls">
           <TodoControls
             todos={todos}
+            filteredBy={filteredBy}
             handleShowAll={this.cloneInitialTodosToState}
             handleShowCompleted={this.handleShowCompleted}
             handleShowIncomplete={this.handleShowIncomplete}

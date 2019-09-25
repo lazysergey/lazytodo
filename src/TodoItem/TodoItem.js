@@ -15,7 +15,6 @@ TodoItem.propTypes = {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         date: PropTypes.number.isRequired,
-        listId: PropTypes.number.isRequired,
         completed: PropTypes.bool.isRequired,
     }),
     handleDelete: PropTypes.func.isRequired,
