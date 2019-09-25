@@ -1,41 +1,92 @@
-import React, { PureComponent } from './../../node_modules/react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import './TodoInput.scss';
 
 export class TodoInput extends PureComponent {
     state = {
-        value: ''
+        value: '',
+        isSending: false
     }
 
     handleOnChange = (e) => {
-        // this.props.handleInputChange(e);
-        // e.persist()
-        // console.log(e.target.value);
-        this.setState({ value: e.target.value });
+        this.setState({
+            value: e.target.value,
+            hasError: false
+        });
     }
-    // handleOnKeyUp = (e) => {
-    //     this.props.getInputValue(e.nativeEvent.target.value);
-    // }
 
-    addNewTodo = (e) => {
+    handleOnKeyDown = (e) => {
+        if (this.state.isSending) {
+            return;
+        }
         if (e.nativeEvent.code === "Enter") {
-            // const value = e.target.value;
-            if (!e.target.value) {
-                return;
-            }
-            this.props.addNewTodo(e.target.value).then(_ => {
-                console.log(_);
-                this.setState({ value: '' });
-            })
-            // this.addNewTodo(value);
+            this.addNewTodo();
         }
     }
 
-    render() {
-        return <input
-            type='text'
-            value={this.state.value}
-            // onKeyUp={this.handleOnKeyUp}
-            onKeyUp={this.addNewTodo}
-            onChange={this.handleOnChange}
-        />
+    handleButtonClick = () => {
+        if (this.state.isSending) {
+            return;
+        }
+        this.addNewTodo();
     }
+
+    addNewTodo = () => {
+        const { value } = this.state;
+        if (!value) {
+            return;
+        }
+        this.setState({
+            isSending: true
+        })
+
+        return this.props.addNewTodo(value)
+            .then(_ => {
+                this.setState({ value: '', isSending: false });
+            })
+            .catch(error => {
+
+                this.setState({
+                    hasError: error
+                });
+
+                setTimeout(() => {
+                    this.setState({
+                        hasError: null
+                    });
+                }, 400)
+            })
+    }
+
+    render() {
+        const { hasError, value, isSending } = this.state;
+        const className = [
+            'todo-input',
+            hasError ? 'todo-input--error' : null,
+            isSending ? 'todo-input--sending' : null
+        ].filter(c => c).join(' ');
+
+        return (
+            <div className="todo-input__wrapper">
+                <input
+                    placeholder='Add new task...'
+                    type='text'
+                    className={className}
+                    value={value}
+                    onKeyDown={this.handleOnKeyDown}
+                    onChange={this.handleOnChange}
+                    disabled={isSending}
+                />
+                <button
+                    className="todo-input__button"
+                    onClick={this.handleButtonClick}>
+                    +
+            </button>
+            </div>
+        )
+    }
+}
+
+TodoInput.propTypes = {
+    addNewTodo: PropTypes.func.isRequired
 }

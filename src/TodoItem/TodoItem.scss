@@ -1,6 +1,62 @@
 .todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 40px;
+    position: relative;
+    border-bottom: 1px solid #09d3ac10;
+    transition: color .4s;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
     &--completed {
-        color: yellow;
+        color: hsla(195, 85%, 50%, 1);
         text-decoration: line-through;
+    }
+
+    &__toggle {
+        left: 0;
+    }
+
+    &__delete {
+        right: 0;
+        font-size: 14px;
+        user-select: none;
+    }
+
+    &__title {
+        padding-left: 40px;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+
+        button {
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    button {
+        $size: 25px;
+        position: absolute;
+        border: none;
+        outline: none;
+        color: inherit;
+        box-shadow: none;
+        font-size: 0.6 * $size;
+        background: none;
+        display: inline-flex;
+        line-height: 1;
+        width: #{$size};
+        height: #{$size};
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #09d3ac20;
     }
 }

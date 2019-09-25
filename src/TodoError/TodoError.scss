@@ -1,0 +1,23 @@
+.todo-error {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: autoHide .5s forwards;
+    justify-content: center;
+    color: white;
+    animation-delay: 2000ms;
+    background: #f11114;
+    width: 400px;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+    padding: 3px;
+    line-height: 1;
+
+    @keyframes autoHide {
+        to {
+            transform: translateX(-50%) translateY(-120%);
+        }
+    }
+}
