@@ -21,14 +21,14 @@
   "scripts": {
     "start-csr": "concurrently --kill-others 'react-scripts start' 'json-server todo.database.json -d=1100 -p=3334'",
     "start-csr-front": "react-scripts start",
-    "start-csr-back": "json-server todo.database.json -d=1100 -p=3334",
+    "start-back": "json-server todo.database.json -d=1100 -p=3334",
     "start-ssr": "concurrently --kill-others 'next' 'json-server todo.database.json -d=1100 -p=3334'",
-    "next-dev": "next",
-    "next-build": "next build",
-    "next-start": "next start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "next-dev": "next",
+    "next-build": "next build",
+    "next-start": "next start"
   },
   "eslintConfig": {
     "extends": "react-app"
