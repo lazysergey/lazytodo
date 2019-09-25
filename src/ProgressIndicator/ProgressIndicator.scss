@@ -17,14 +17,16 @@
         &--circle {
             position: absolute;
             height: 100%;
-            stroke-dasharray: 144;
-            stroke-dashoffset: 144;
+            stroke-dasharray: 145;
+            stroke-dashoffset: 145;
             transition: stroke-dashoffset .4s ease;
             stroke-width: 3;
             stroke: cyan;
+            // stroke: var(--accent-color);
             fill: transparent;
             transform: rotate(-90deg);
             box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.4) inset;
+            // box-shadow: 0 0 0 3px var(--accent-color) inset;
             border-radius: 50%;
 
             circle {

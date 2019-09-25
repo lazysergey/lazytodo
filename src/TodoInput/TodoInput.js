@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import './TodoInput.scss';
 
 export class TodoInput extends PureComponent {
@@ -15,20 +16,26 @@ export class TodoInput extends PureComponent {
     }
 
     handleOnKeyDown = (e) => {
-        if (this.state.isSending) return null;
+        if (this.state.isSending) {
+            return;
+        }
         if (e.nativeEvent.code === "Enter") {
             this.addNewTodo();
         }
     }
 
     handleButtonClick = () => {
-        if (this.state.isSending) return null;
+        if (this.state.isSending) {
+            return;
+        }
         this.addNewTodo();
     }
 
     addNewTodo = () => {
         const { value } = this.state;
-        if (!value) return null;
+        if (!value) {
+            return;
+        }
         this.setState({
             isSending: true
         })
@@ -78,4 +85,8 @@ export class TodoInput extends PureComponent {
             </div>
         )
     }
+}
+
+TodoInput.propTypes = {
+    addNewTodo: PropTypes.func.isRequired
 }

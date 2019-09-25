@@ -51,7 +51,8 @@ export class TodoApp extends Component {
     return http.addItem({
       name: value,
       date: Date.now(),
-      listId: this.state.listId
+      listId: this.state.listId,
+      completed: false
     })
       .then(({ data: newTodo }) => {
         this.setState(({ todos }) => ({
@@ -95,10 +96,11 @@ export class TodoApp extends Component {
   }
 
   render() {
-    const { todos, todosInitial: {length: todosInitialLength} } = this.state;
+    const { todos, todosInitial: { length: todosInitialLength } } = this.state;
     return (
-      <div className="todo-react-app">
+      <div className="todo-react-app" style={{ '--accent-color': this.state.hasError ? '#f11114' : '#13ecda' }}  >
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
+        <a href="https://www.npmjs.com/package/json-server" className="todo-react-app__delay-info">api_delay: <strong>1100ms</strong></a>
         <div className="todo-react-app__header">
           <TodoLogo todos={this.state.todos} />
         </div>

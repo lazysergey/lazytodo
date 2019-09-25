@@ -17,7 +17,7 @@
   "scripts": {
     "start": "concurrently --kill-others 'react-scripts start' 'json-server todo.database.json -d=0 -p=3334'",
     "startf": "react-scripts start",
-    "startb": "json-server todo.database.json -d=7100 -p=3334",
+    "startb": "json-server todo.database.json -d=1100 -p=3334",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

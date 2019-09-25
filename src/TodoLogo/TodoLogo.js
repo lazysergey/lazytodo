@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import { timer } from 'rxjs';
 import { map } from 'rxjs/operators';
+import PropTypes from 'prop-types';
 import './TodoLogo.scss'
 
 export class TodoLogo extends Component {
+
+    static propTypes = {
+        color: PropTypes.string,
+        todos: PropTypes.arrayOf(
+            PropTypes.exact({
+                id: PropTypes.number.isRequired,
+                name: PropTypes.string.isRequired,
+                date: PropTypes.number.isRequired,
+                listId: PropTypes.number.isRequired,
+                completed: PropTypes.bool.isRequired,
+            })
+        )
+    }
     state = {
         className: 'animate-fill',
         animationDuration: 1000
     };
     timerSubscription;
-    
+
     componentDidMount = () => {
         this.timerSubscription = timer(0, this.state.animationDuration)
             .pipe(

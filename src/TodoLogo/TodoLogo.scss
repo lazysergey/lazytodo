@@ -11,11 +11,13 @@
             stroke-dashoffset: 480;
             fill: transparent;
             stroke: #09d3ac;
+            // stroke: var(--accent-color);
 
             @keyframes fill {
                 100% {
                     stroke-dashoffset: 0;
                     fill: #09d3ac;
+                    // fill: var(--accent-color);
                     stroke: transparent;
                 }
             }
@@ -25,12 +27,14 @@
             animation: unfill 2s forwards linear;
             stroke-dashoffset: 0;
             fill: #09d3ac;
+            // fill: var(--accent-color);
             stroke: transparent;
 
             @keyframes unfill {
                 100% {
                     fill: transparent;
                     stroke: #09d3ac;
+                    // stroke: var(--accent-color);
                     stroke-dashoffset: 480;
 
 

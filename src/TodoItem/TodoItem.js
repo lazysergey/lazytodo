@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import "./TodoItem.scss"
 
 export const TodoItem = ({ todoItem, handleDelete, handleCompleteToggle }) => (
@@ -8,3 +9,15 @@ export const TodoItem = ({ todoItem, handleDelete, handleCompleteToggle }) => (
         <button className="todo-item__delete" onClick={handleDelete}>✕</button>
     </div>
 )
+
+TodoItem.propTypes = {
+    todoItem: PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        listId: PropTypes.number.isRequired,
+        completed: PropTypes.bool.isRequired,
+    }),
+    handleDelete: PropTypes.func.isRequired,
+    handleCompleteToggle: PropTypes.func.isRequired,
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ProgressIndicator.scss';
 
 export const ProgressIndicator = ({ todos }) => {
@@ -10,7 +11,7 @@ export const ProgressIndicator = ({ todos }) => {
         to: 220
     }
     const color = `hsl(${hue.from + progress * (hue.to - hue.from)}, 75%, 50%)`;
-    const svgStrokeStyle = progress ? { strokeDashoffset: 144 - progress * 144 } : null;
+    const svgStrokeStyle = progress ? { strokeDashoffset: 145 - progress * 145 } : null;
 
     return (
         <div className="progress__wrapper">
@@ -22,4 +23,6 @@ export const ProgressIndicator = ({ todos }) => {
     )
 }
 
-// ProgressIndicator.prop
+ProgressIndicator.propTypes = {
+    todos: PropTypes.array.isRequired
+}
