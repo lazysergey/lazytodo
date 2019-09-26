@@ -1,16 +1,76 @@
 {
   "todo": [
     {
-      "name": "asdfas",
-      "date": 1569499605358,
-      "completed": false,
+      "name": "Talk to Darina",
+      "date": 1569499679806,
+      "completed": true,
       "id": 1
     },
     {
-      "name": "asdf",
-      "date": 1569499610349,
-      "completed": false,
+      "name": "Get Crello test task",
+      "date": 1569499687717,
+      "completed": true,
       "id": 2
+    },
+    {
+      "name": "Develop basic functionality",
+      "date": 1569499690972,
+      "completed": true,
+      "id": 3
+    },
+    {
+      "name": "Style application",
+      "date": 1569499695323,
+      "completed": true,
+      "id": 4
+    },
+    {
+      "name": "Create progress indicator",
+      "date": 1569499698283,
+      "completed": true,
+      "id": 5
+    },
+    {
+      "name": "Show animation and disable input while sending request, disable redundant user-selects",
+      "date": 1569499701755,
+      "completed": true,
+      "id": 6
+    },
+    {
+      "name": "Implement logo animation on loading",
+      "date": 1569499705700,
+      "completed": true,
+      "id": 7
+    },
+    {
+      "name": "Add prop types",
+      "date": 1569499710375,
+      "completed": true,
+      "id": 8
+    },
+    {
+      "name": "Convert app to Next.js SSR SPA",
+      "date": 1569499732016,
+      "completed": true,
+      "id": 9
+    },
+    {
+      "name": "Make todos text copyable as plain text with icons",
+      "date": 1569499738300,
+      "completed": true,
+      "id": 10
+    },
+    {
+      "name": "Make demo video",
+      "date": 1569499843394,
+      "completed": true,
+      "id": 11
+    },
+    {
+      "name": "Receive task feedback",
+      "date": 1569499860283,
+      "completed": false,
+      "id": 12
     }
   ]
 }
