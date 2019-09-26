@@ -1,52 +1,16 @@
 {
   "todo": [
     {
-      "name": "asdf",
-      "date": 1569449479686,
+      "name": "asdfas",
+      "date": 1569499605358,
       "completed": false,
       "id": 1
     },
     {
-      "name": "3123",
-      "date": 1569449481743,
+      "name": "asdf",
+      "date": 1569499610349,
       "completed": false,
       "id": 2
-    },
-    {
-      "name": "dsaf",
-      "date": 1569449612469,
-      "completed": false,
-      "id": 3
-    },
-    {
-      "name": "fasd",
-      "date": 1569449614781,
-      "completed": false,
-      "id": 4
-    },
-    {
-      "name": "asdf",
-      "date": 1569449626356,
-      "completed": false,
-      "id": 5
-    },
-    {
-      "name": "fasd",
-      "date": 1569449629559,
-      "completed": false,
-      "id": 6
-    },
-    {
-      "name": "fasdf\\",
-      "date": 1569450037364,
-      "completed": false,
-      "id": 7
-    },
-    {
-      "name": "dfs",
-      "date": 1569450045379,
-      "completed": false,
-      "id": 8
     }
   ]
 }

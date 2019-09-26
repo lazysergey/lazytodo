@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoInput } from '../TodoInput/TodoInput';
 import { TodoControls } from '../TodoControls/TodoControls';
@@ -10,19 +11,25 @@ import { http } from './httpService';
 
 export class TodoApp extends Component {
   state = {
-    todos: [],
-    todosInitial: [],
+    todos: this.props.todos,
+    todosInitial: this.props.todos,
     filteredBy: 'all'
   }
 
-  componentDidMount() {
-    http.getAll()
-      .then(todos => {
-        this.setState({
-          todosInitial: todos.sort((t1, t2) => t1.date - t2.date)
-        }, this.cloneInitialTodosToState)
+  static propTypes = {
+    todos: PropTypes.arrayOf(
+      PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        date: PropTypes.number.isRequired,
+        completed: PropTypes.bool.isRequired,
       })
-      .catch(e => this.httpHandleError(e));
+    )
+  }
+
+  static async getInitialProps() {
+    return http.getAll()
+      .then(todos => ({ todos: todos.sort((t1, t2) => t1.date - t2.date) }));
   }
 
   handleDelete = (todoItem) => () => {
@@ -98,7 +105,7 @@ export class TodoApp extends Component {
   }
 
   render() {
-    const { todos, todosInitial: { length: todosInitialLength }, filteredBy } = this.state;
+    const { todos, todosInitial, filteredBy } = this.state;
     return (
       <div className="todo-react-app">
         {this.state.hasError ? <TodoError hasError={this.state.hasError} /> : ''}
@@ -112,7 +119,7 @@ export class TodoApp extends Component {
           handleDelete={this.handleDelete}
           handleCompleteToggle={this.handleCompleteToggle}
           todos={todos}
-          loaded={!!todosInitialLength}
+          todosInitial={todosInitial}
         />
         <div className="todo-react-app__controls">
           <TodoControls

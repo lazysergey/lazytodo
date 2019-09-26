@@ -5,7 +5,7 @@ import "./TodoItem.scss"
 export const TodoItem = ({ todoItem, handleDelete, handleCompleteToggle }) => (
     <div className={`todo-item ${todoItem.completed ? 'todo-item--completed' : ''}`}>
         <button className="todo-item__toggle" onClick={handleCompleteToggle}>✓</button>
-        {todoItem.name}
+        <span><span className="todo-item__copy-icon">{todoItem.completed ? '[x]':'[ ]'}&nbsp;</span>{todoItem.name}</span>
         <button className="todo-item__delete" onClick={handleDelete}>✕</button>
     </div>
 )

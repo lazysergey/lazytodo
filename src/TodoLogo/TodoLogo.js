@@ -17,10 +17,12 @@ export class TodoLogo extends Component {
             })
         )
     }
+
     state = {
         className: 'animate-fill',
         animationDuration: 1000
     };
+    
     timerSubscription;
 
     componentDidMount = () => {
