@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './TodoControls.scss';
+import { FILTER_OPTIONS } from '../TodoApp/constants';
 
 export const TodoControls = ({ handleShowAll, handleShowCompleted, handleShowIncomplete, setAllCompleted, filteredBy }) => (
     <div className="todo-controls d-flex justify-content-center">
         <button
-            className={filteredBy === 'all' ? 'active' : null}
+            className={filteredBy === FILTER_OPTIONS.All ? 'active' : null}
             onClick={handleShowAll}>
             all
         </button>
         <button
-            className={filteredBy === 'completed' ? 'active' : null}
+            className={filteredBy === FILTER_OPTIONS.Completed ? 'active' : null}
             onClick={handleShowCompleted}>
             done
         </button>
         <button
-            className={filteredBy === 'incomplete' ? 'active' : null}
+            className={filteredBy === FILTER_OPTIONS.Incomplete ? 'active' : null}
             onClick={handleShowIncomplete}>
             incomplete
         </button>
@@ -29,7 +30,7 @@ export const TodoControls = ({ handleShowAll, handleShowCompleted, handleShowInc
 )
 
 TodoControls.propTypes = {
-    filteredBy: PropTypes.oneOf(['all', 'completed', 'incomplete']),
+    filteredBy: PropTypes.oneOf(Object.keys(FILTER_OPTIONS).map(key => FILTER_OPTIONS[key])),
     handleShowAll: PropTypes.func.isRequired,
     handleShowCompleted: PropTypes.func.isRequired,
     handleShowIncomplete: PropTypes.func.isRequired,

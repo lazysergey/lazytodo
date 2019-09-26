@@ -43,6 +43,7 @@ export class TodoInput extends PureComponent {
         return this.props.addNewTodo(value)
             .then(_ => {
                 this.setState({ value: '', isSending: false });
+                this.todoInputElementRef.focus();
             })
             .catch(error => {
 
@@ -69,6 +70,8 @@ export class TodoInput extends PureComponent {
         return (
             <div className="todo-input__wrapper">
                 <input
+                    ref={(input) => { this.todoInputElementRef = input; }}
+                    autoFocus
                     placeholder='Add new task...'
                     type='text'
                     className={className}

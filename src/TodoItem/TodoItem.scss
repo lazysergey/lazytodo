@@ -5,15 +5,20 @@
     padding: 7px 40px;
     position: relative;
     border-bottom: 1px solid #09d3ac10;
-    transition: color .4s;
+    transition: color .4s, background-color .4s;
+
+    &:not(.todo-item--completed){
+        color: hsla(195, 85%, 50%, 1);
+    }
 
     &:last-child {
         border-bottom: none;
     }
 
     &--completed {
-        color: hsla(195, 85%, 50%, 1);
+        color: #09d3ac;
         text-decoration: line-through;
+        background: rgba(0, 255, 255, 0.015);
     }
 
     &__toggle {
@@ -37,7 +42,7 @@
         }
     }
 
-    &__copy-icon {
+    &__hidden-copy-icon {
         color: transparent; 
         font-size: 0;
     }

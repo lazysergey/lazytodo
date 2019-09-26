@@ -4,16 +4,17 @@ import { TodoList } from '../TodoList/TodoList';
 import { TodoInput } from '../TodoInput/TodoInput';
 import { TodoControls } from '../TodoControls/TodoControls';
 import { ProgressIndicator } from '../ProgressIndicator/ProgressIndicator';
-import './TodoApp.scss';
 import { TodoError } from '../TodoError/TodoError';
 import { TodoLogo } from '../TodoLogo/TodoLogo';
 import { http } from './httpService';
+import './TodoApp.scss';
+import { FILTER_OPTIONS } from './constants';
 
 export class TodoApp extends Component {
   state = {
     todos: this.props.todos,
     todosInitial: this.props.todos,
-    filteredBy: 'all'
+    filteredBy: FILTER_OPTIONS.All
   }
 
   static propTypes = {
@@ -37,7 +38,7 @@ export class TodoApp extends Component {
       .then(data => {
         this.setState(({ todos }) => ({
           todosInitial: todos.filter(ti => ti.id !== todoItem.id)
-        }), this.cloneInitialTodosToState);
+        }), this.doFiltering);
       })
       .catch(e => this.httpHandleError(e));
   }
@@ -46,8 +47,30 @@ export class TodoApp extends Component {
     todoItem.completed = !todoItem.completed;
     return http.patchItem(todoItem)
       .then(updatedTodoItem => {
-        this.setState(({ todos }) => ({ todosInitial: todos.map(todoItem => todoItem.id === updatedTodoItem.id ? updatedTodoItem : todoItem) }), this.cloneInitialTodosToState)
+        this.setState(({ todosInitial }) => ({
+          todosInitial: todosInitial.map(todoItem =>
+            todoItem.id === updatedTodoItem.id
+              ? updatedTodoItem
+              : todoItem)
+        }), this.doFiltering)
       });
+  }
+
+  doFiltering = () => {
+    switch (this.state.filteredBy) {
+      case FILTER_OPTIONS.All: {
+        return this.handleFilterReset();
+      }
+      case FILTER_OPTIONS.Completed: {
+        return this.handleFilterByCompleted();
+      }
+      case FILTER_OPTIONS.Incomplete: {
+        return this.handleFilterByIncomplete();
+      }
+      default: {
+        return null;
+      }
+    }
   }
 
   httpHandleError = (error) => {
@@ -59,19 +82,18 @@ export class TodoApp extends Component {
       name: value,
       date: Date.now(),
       completed: false
+    }).then(({ data: newTodo }) => {
+      this.setState(({ todosInitial }) => ({
+        todosInitial: [...todosInitial, newTodo]
+      }), this.doFiltering)
     })
-      .then(({ data: newTodo }) => {
-        this.setState(({ todosInitial }) => ({
-          todosInitial: [...todosInitial, newTodo]
-        }), this.cloneInitialTodosToState)
-      })
       .catch(e => this.httpHandleError(e));
   }
 
-  cloneInitialTodosToState = () => {
+  handleFilterReset = () => {
     this.setState(({ todosInitial }) => ({
       todos: [...todosInitial],
-      filteredBy: 'all'
+      filteredBy: FILTER_OPTIONS.All
     }));
   }
 
@@ -85,22 +107,22 @@ export class TodoApp extends Component {
         newtodos => {
           this.setState({
             todosInitial: newtodos
-          }, this.cloneInitialTodosToState)
+          }, this.doFiltering)
         }
       )
   }
 
-  handleShowCompleted = () => {
+  handleFilterByCompleted = () => {
     this.setState(({ todosInitial }) => ({
       todos: todosInitial.filter(todo => todo.completed),
-      filteredBy: 'completed'
+      filteredBy: FILTER_OPTIONS.Completed
     }))
   }
 
-  handleShowIncomplete = () => {
+  handleFilterByIncomplete = () => {
     this.setState(({ todosInitial }) => ({
       todos: todosInitial.filter(todo => !todo.completed),
-      filteredBy: 'incomplete'
+      filteredBy: FILTER_OPTIONS.Incomplete
     }))
   }
 
@@ -125,15 +147,15 @@ export class TodoApp extends Component {
           <TodoControls
             todos={todos}
             filteredBy={filteredBy}
-            handleShowAll={this.cloneInitialTodosToState}
-            handleShowCompleted={this.handleShowCompleted}
-            handleShowIncomplete={this.handleShowIncomplete}
+            handleShowAll={this.handleFilterReset}
+            handleShowCompleted={this.handleFilterByCompleted}
+            handleShowIncomplete={this.handleFilterByIncomplete}
             setAllCompleted={this.setAllCompleted}
           />
         </div>
         <div className="todo-react-app__footer">
           <ProgressIndicator
-            todos={todos}
+            todosInitial={todosInitial}
           />
         </div>
       </div>
