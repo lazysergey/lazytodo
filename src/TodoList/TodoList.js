@@ -31,7 +31,7 @@ TodoList.propTypes = {
             date: PropTypes.number.isRequired,
             completed: PropTypes.bool.isRequired,
         })
-    ),
+    ).isRequired,
     handleDelete: PropTypes.func.isRequired,
     handleCompleteToggle: PropTypes.func.isRequired,
     loaded: PropTypes.bool

@@ -15,14 +15,14 @@ export class TodoLogo extends Component {
                 date: PropTypes.number.isRequired,
                 completed: PropTypes.bool.isRequired,
             })
-        )
+        ).isRequired,
     }
 
     state = {
         className: 'animate-fill',
         animationDuration: 1000
     };
-    
+
     timerSubscription;
 
     componentDidMount = () => {

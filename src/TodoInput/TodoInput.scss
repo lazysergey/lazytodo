@@ -11,10 +11,11 @@
     font-size: 16px;
     margin-bottom: 20px;
     box-shadow: 0 0 0 1px #09d3ac;
-    transition: box-shadow .4s ease;
+    transition: background-color .4s ease, color .4s ease;
 
     &::-webkit-input-placeholder {
-        color: #09d3ac70;
+        color: #09d3ac55;
+        transition: color;
     }
 
     &--sending {
@@ -22,7 +23,7 @@
         background: linear-gradient(45deg, #09d3ac30, transparent);
         background-size: 100% 200%;
         pointer-events: none;
-        animation: move-background 1s infinite;
+        animation: move-background .4s infinite;
 
         @keyframes move-background {
 
@@ -38,20 +39,8 @@
     }
 
     &--error {
-        box-shadow: 0 0 0 2px #f11114;
-        animation: alert-background 1s forwards;
-
-        @keyframes alert-background {
-
-            0%,
-            100% {
-                background: #09d3ac30;
-            }
-
-            50% {
-                background: #09d3ac10;
-            }
-        }
+        color: #282c34;
+        background: #09d3ac10;
     }
 
     &__wrapper {
@@ -69,8 +58,13 @@
         display: flex;
         padding: 15px;
         right: 0;
+        transition: color .4s;
         top: calc(50% - 1px);
         line-height: 1;
         transform: translateY(-50%);
+
+        &--error {
+            color: #282c34;
+        }
     }
 }

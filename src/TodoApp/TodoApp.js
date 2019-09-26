@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoInput } from '../TodoInput/TodoInput';
 import { TodoControls } from '../TodoControls/TodoControls';
-import { ProgressIndicator } from '../ProgressIndicator/ProgressIndicator';
+import { TodoProgressIndicator } from '../TodoProgress/TodoProgressIndicator';
 import { TodoError } from '../TodoError/TodoError';
 import { TodoLogo } from '../TodoLogo/TodoLogo';
 import { http } from './httpService';
@@ -25,7 +25,7 @@ export class TodoApp extends Component {
         date: PropTypes.number.isRequired,
         completed: PropTypes.bool.isRequired,
       })
-    )
+    ).isRequired,
   }
 
   static async getInitialProps() {
@@ -154,7 +154,7 @@ export class TodoApp extends Component {
           />
         </div>
         <div className="todo-react-app__footer">
-          <ProgressIndicator
+          <TodoProgressIndicator
             todosInitial={todosInitial}
           />
         </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ProgressIndicator.scss';
+import './TodoProgressIndicator.scss';
 
-export const ProgressIndicator = ({ todosInitial }) => {
+export const TodoProgressIndicator = ({ todosInitial }) => {
     const completedCount = todosInitial.filter(t => t.completed).length;
     const allCount = todosInitial.length;
     const progress = completedCount / allCount;
@@ -20,13 +20,20 @@ export const ProgressIndicator = ({ todosInitial }) => {
             </span>
             <svg className="progress__indicator progress__indicator--circle" viewBox="0 0 50 50" >
                 <circle cx="25" cy="25" r="23" className="ring--back" />
-                <circle cx="25" cy="25" r="23" className="ring--filler" stroke="transparent" opacity={progress} />
+                <circle cx="25" cy="25" r="23" className="ring--filler" stroke="transparent" opacity={progress || 0} />
                 <circle cx="25" cy="25" r="23" className="ring--front" stroke={color} style={svgStrokeStyle} />
             </svg>
         </div>
     )
 }
 
-ProgressIndicator.propTypes = {
-    todosInitial: PropTypes.array.isRequired
+TodoProgressIndicator.propTypes = {
+    todosInitial: PropTypes.arrayOf(
+        PropTypes.exact({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            date: PropTypes.number.isRequired,
+            completed: PropTypes.bool.isRequired,
+        })
+    ).isRequired,
 }
