@@ -1,116 +1,76 @@
 {
   "todo": [
     {
-      "name": "asdf asdf as df asdf asd fasd fas dfas dfas dfasd fas df asdf asdf as df asdf asd fas df",
-      "date": 1569271191768,
-      "listId": 1,
-      "id": 83,
-      "completed": true
-    },
-    {
-      "name": "fasdf",
-      "date": 1569405374161,
-      "listId": 1,
+      "name": "Talk to Darina",
+      "date": 1569499679806,
       "completed": true,
-      "id": 133
+      "id": 1
     },
     {
-      "name": "33123",
-      "date": 1569405560378,
-      "listId": 1,
+      "name": "Get Crello test task",
+      "date": 1569499687717,
       "completed": true,
-      "id": 134
+      "id": 2
     },
     {
-      "name": "fsdfsd",
-      "date": 1569405563866,
-      "listId": 1,
-      "completed": false,
-      "id": 135
-    },
-    {
-      "name": "asdfasd",
-      "date": 1569406624361,
-      "listId": 1,
-      "completed": false,
-      "id": 136
-    },
-    {
-      "name": "fasdfsd",
-      "date": 1569406629184,
-      "listId": 1,
-      "completed": false,
-      "id": 137
-    },
-    {
-      "name": "fasdf",
-      "date": 1569406632504,
-      "listId": 1,
+      "name": "Develop basic functionality",
+      "date": 1569499690972,
       "completed": true,
-      "id": 138
+      "id": 3
     },
     {
-      "name": "igftu",
-      "date": 1569424374868,
-      "listId": 1,
-      "completed": false,
-      "id": 139
-    },
-    {
-      "name": "asdf",
-      "date": 1569441011959,
-      "listId": 1,
+      "name": "Style application",
+      "date": 1569499695323,
       "completed": true,
-      "id": 140
+      "id": 4
     },
     {
-      "name": "fff",
-      "date": 1569441014301,
-      "listId": 1,
-      "completed": false,
-      "id": 141
-    },
-    {
-      "name": "1111",
-      "date": 1569441016910,
-      "listId": 1,
+      "name": "Create progress indicator",
+      "date": 1569499698283,
       "completed": true,
-      "id": 142
+      "id": 5
     },
     {
-      "name": "33424123",
-      "date": 1569441019468,
-      "listId": 1,
-      "completed": false,
-      "id": 143
-    },
-    {
-      "name": "asdfasdf",
-      "date": 1569441103792,
-      "listId": 1,
-      "completed": false,
-      "id": 144
-    },
-    {
-      "name": "fsadf",
-      "date": 1569441107377,
-      "listId": 1,
+      "name": "Show animation and disable input while sending request, disable redundant user-selects",
+      "date": 1569499701755,
       "completed": true,
-      "id": 145
+      "id": 6
     },
     {
-      "name": "asdffasdffewqerw",
-      "date": 1569442449799,
-      "listId": 1,
-      "completed": false,
-      "id": 146
+      "name": "Implement logo animation on loading",
+      "date": 1569499705700,
+      "completed": true,
+      "id": 7
     },
     {
-      "name": "asdfasd",
-      "date": 1569442457222,
-      "listId": 1,
+      "name": "Add prop types",
+      "date": 1569499710375,
+      "completed": true,
+      "id": 8
+    },
+    {
+      "name": "Convert app to Next.js SSR SPA",
+      "date": 1569499732016,
+      "completed": true,
+      "id": 9
+    },
+    {
+      "name": "Make todos text copyable as plain text with icons",
+      "date": 1569499738300,
+      "completed": true,
+      "id": 10
+    },
+    {
+      "name": "Make demo video",
+      "date": 1569499843394,
+      "completed": true,
+      "id": 11
+    },
+    {
+      "name": "Receive task feedback",
+      "date": 1569499860283,
       "completed": false,
-      "id": 147
+      "id": 12
     }
   ]
 }

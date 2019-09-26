@@ -1,21 +1,27 @@
 .todo-controls {
     width: 100%;
+
     button {
         background: none;
         color: inherit;
         outline: none;
         border-color: inherit;
         user-select: none;
+        transition: box-shadow .4s;
+
+        &.active,
         &:active {
-            border-color: cyan;
+            border-color: #13ecd9;
+            box-shadow: 0 0 0 20px #13ecd9 inset;
+            color: #282c34;
         }
 
         &:first-child {
-            border-radius: 5px 0 0 5px ;
+            border-radius: 5px 0 0 5px;
         }
-        
+
         &:last-child {
-            border-radius: 0 5px 5px 0 ;
+            border-radius: 0 5px 5px 0;
         }
     }
 }

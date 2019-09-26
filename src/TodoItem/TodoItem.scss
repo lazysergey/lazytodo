@@ -1,6 +1,6 @@
 .todo-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 7px 40px;
     position: relative;
@@ -23,7 +23,6 @@
     &__delete {
         right: 0;
         font-size: 14px;
-        user-select: none;
     }
 
     &__title {
@@ -38,7 +37,13 @@
         }
     }
 
+    &__copy-icon {
+        color: transparent; 
+        font-size: 0;
+    }
+
     button {
+        user-select: none;
         $size: 25px;
         position: absolute;
         border: none;

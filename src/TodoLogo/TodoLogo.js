@@ -13,15 +13,16 @@ export class TodoLogo extends Component {
                 id: PropTypes.number.isRequired,
                 name: PropTypes.string.isRequired,
                 date: PropTypes.number.isRequired,
-                listId: PropTypes.number.isRequired,
                 completed: PropTypes.bool.isRequired,
             })
         )
     }
+
     state = {
         className: 'animate-fill',
         animationDuration: 1000
     };
+    
     timerSubscription;
 
     componentDidMount = () => {
