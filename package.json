@@ -19,10 +19,10 @@
     "css-loader": "1.0.1"
   },
   "scripts": {
-    "start-csr": "concurrently --kill-others 'react-scripts start' 'json-server todo.database.json -d=1100 -p=3334'",
+    "start-ssr": "concurrently --kill-others 'next' 'json-server todo.database.json -p=3333'",
+    "start-csr": "concurrently --kill-others 'react-scripts start' 'json-server todo.database.json -p=3333'",
     "start-csr-front": "react-scripts start",
-    "start-back": "json-server todo.database.json -d=1100 -p=3334",
-    "start-ssr": "concurrently --kill-others 'next' 'json-server todo.database.json -d=1100 -p=3334'",
+    "start-back": "json-server todo.database.json -p=3333",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

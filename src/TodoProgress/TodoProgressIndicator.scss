@@ -1,0 +1,49 @@
+.progress {
+
+    &__wrapper {
+        height: 50px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 0 20px;
+        user-select: none;
+    }
+
+    &__title {
+        font-size: 10px;
+    }
+
+    &__indicator {
+        &--circle {
+            position: absolute;
+            height: 100%;
+            transition: stroke-dashoffset .4s ease;
+            stroke-width: 3;
+            fill: transparent;
+            transform: rotate(-90deg);
+            border-radius: 50%;
+
+            circle {
+                stroke-dasharray: 145;
+                stroke-dashoffset: 145;
+
+                &.ring {
+                    &--front {
+                        transition: stroke .4s ease, stroke-dashoffset .4s ease;
+                    }
+
+                    &--back {
+                        stroke: rgba(0, 255, 255, 0.4);
+                        stroke-dashoffset: 0;
+                    }
+
+                    &--filler {
+                        transition: opacity .4s ease;
+                        fill: rgba(0, 255, 255, 0.03);
+                    }
+                }
+            }
+        }
+    }
+}

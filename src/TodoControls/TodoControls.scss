@@ -9,6 +9,10 @@
         user-select: none;
         transition: box-shadow .4s;
 
+        +button {
+            border-left: none;
+        }
+
         &.active,
         &:active {
             border-color: #13ecd9;

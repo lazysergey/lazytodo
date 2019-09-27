@@ -5,15 +5,37 @@
     padding: 7px 40px;
     position: relative;
     border-bottom: 1px solid #09d3ac10;
-    transition: color .4s;
+    transition: color .4s, background-color .4s;
+
+    &:not(.todo-item--completed){
+        color: hsla(195, 85%, 50%, 1);
+    }
 
     &:last-child {
         border-bottom: none;
     }
 
+    &__content-container {
+        width: 100%;
+
+        input {
+            background: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            outline: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            text-decoration: none;  
+        }
+    }
+
     &--completed {
-        color: hsla(195, 85%, 50%, 1);
+        color: #09d3ac;
         text-decoration: line-through;
+        text-decoration-color: #09d3acAA;
+        background: rgba(0, 255, 255, 0.015);
     }
 
     &__toggle {
@@ -37,7 +59,7 @@
         }
     }
 
-    &__copy-icon {
+    &__hidden-copy-icon {
         color: transparent; 
         font-size: 0;
     }

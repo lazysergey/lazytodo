@@ -19,7 +19,7 @@ export class TodoInput extends PureComponent {
         if (this.state.isSending) {
             return;
         }
-        if (e.nativeEvent.code === "Enter") {
+        if (e.key === "Enter") {
             this.addNewTodo();
         }
     }
@@ -33,7 +33,9 @@ export class TodoInput extends PureComponent {
 
     addNewTodo = () => {
         const { value } = this.state;
-        if (!value) {
+        if (!value.trim()) {
+            this.setInputErrorState(true);
+            this.setState({ value: '' });
             return;
         }
         this.setState({
@@ -43,19 +45,23 @@ export class TodoInput extends PureComponent {
         return this.props.addNewTodo(value)
             .then(_ => {
                 this.setState({ value: '', isSending: false });
+                this.todoInputElementRef.focus();
             })
             .catch(error => {
-
-                this.setState({
-                    hasError: error
-                });
-
-                setTimeout(() => {
-                    this.setState({
-                        hasError: null
-                    });
-                }, 400)
+                this.setInputErrorState(error);
             })
+    }
+
+    setInputErrorState = (error) => {
+        this.setState({
+            hasError: error
+        });
+
+        setTimeout(() => {
+            this.setState({
+                hasError: null
+            });
+        }, 400)
     }
 
     render() {
@@ -69,6 +75,8 @@ export class TodoInput extends PureComponent {
         return (
             <div className="todo-input__wrapper">
                 <input
+                    ref={(input) => { this.todoInputElementRef = input; }}
+                    autoFocus
                     placeholder='Add new task...'
                     type='text'
                     className={className}
@@ -78,11 +86,11 @@ export class TodoInput extends PureComponent {
                     disabled={isSending}
                 />
                 <button
-                    className="todo-input__button"
+                    className={`todo-input__button ${hasError ? 'todo-input__button--error' : ''}`}
                     onClick={this.handleButtonClick}>
                     +
             </button>
-            </div>
+            </div >
         )
     }
 }
