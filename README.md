@@ -3,11 +3,14 @@ In the project directory after `npm install`, you can run:
 
 ## SSR
 ### `start-ssr`
-starts SSR (next.js) build bundle with both frontend + backend with 1100 simulated delay
+starts SSR (next.js) build bundle with both frontend + backend launched with concurrently
+
+### `start-ssrd`
+starts SSR (next.js) build bundle with both frontend + backend launched with concurrently (1100ms simulated delay)
 
 ## CSR
 ### `start-csr` 
-starts CSR build bundle with both frontend + backend with 1100 simulated delay
+starts CSR build bundle with both frontend
 
 ### `start-csr-front`
 starts CSR frontend only
