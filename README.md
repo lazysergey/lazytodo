@@ -10,7 +10,7 @@ starts SSR (next.js) build bundle with both frontend + backend launched with con
 
 ## CSR
 ### `start-csr` 
-starts CSR build bundle with both frontend
+starts CSR build bundle with both frontend + backend launched with concurrently
 
 ### `start-csr-front`
 starts CSR frontend only
