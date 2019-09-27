@@ -15,9 +15,26 @@
         border-bottom: none;
     }
 
+    &__content-container {
+        width: 100%;
+
+        input {
+            background: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            outline: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            text-decoration: none;  
+        }
+    }
+
     &--completed {
         color: #09d3ac;
         text-decoration: line-through;
+        text-decoration-color: #09d3acAA;
         background: rgba(0, 255, 255, 0.015);
     }
 

@@ -19,7 +19,7 @@ export class TodoInput extends PureComponent {
         if (this.state.isSending) {
             return;
         }
-        if (e.nativeEvent.code === "Enter") {
+        if (e.key === "Enter") {
             this.addNewTodo();
         }
     }

@@ -43,8 +43,7 @@ export class TodoApp extends Component {
       .catch(e => this.httpHandleError(e));
   }
 
-  handleCompleteToggle = (todoItem) => () => {
-    todoItem.completed = !todoItem.completed;
+  handleEdit = (todoItem) => {
     return http.patchItem(todoItem)
       .then(updatedTodoItem => {
         this.setState(({ todosInitial }) => ({
@@ -53,7 +52,16 @@ export class TodoApp extends Component {
               ? updatedTodoItem
               : todoItem)
         }), this.doFiltering)
+        return updatedTodoItem;
       });
+  }
+
+  handleCompleteToggle = (todoItem) => () => {
+    const newTodoItem = {
+      ...todoItem,
+      completed: !todoItem.completed
+    };
+    return this.handleEdit(newTodoItem);
   }
 
   doFiltering = () => {
@@ -126,6 +134,7 @@ export class TodoApp extends Component {
     }))
   }
 
+
   render() {
     const { todos, todosInitial, filteredBy } = this.state;
     return (
@@ -138,10 +147,10 @@ export class TodoApp extends Component {
           addNewTodo={this.addNewTodo}
         />
         <TodoList
+          todos={todos}
+          handleEdit={this.handleEdit}
           handleDelete={this.handleDelete}
           handleCompleteToggle={this.handleCompleteToggle}
-          todos={todos}
-          todosInitial={todosInitial}
         />
         <div className="todo-react-app__controls">
           <TodoControls
