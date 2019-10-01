@@ -1,5 +1,7 @@
 ## Available Scripts
-In the project directory after `npm install`, you can run:
+In the project directory after `npm install`, you can run scripts described below.
+UI URL: http://localhost:3000
+API URL: http://localhost:3333
 
 ## SSR
 ### `start-ssr`
