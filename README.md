@@ -1,41 +1,41 @@
-## URLs
+# URLs
 1. UI: http://localhost:3000
 2. API: http://localhost:3333
 
-## Available Scripts
+# Available Scripts
 In the project directory after `npm install`, you can run scripts:
 
-## SSR
-### `start-ssr`
+### SSR
+#### `start-ssr`
 starts SSR (next.js) build bundle with both frontend + backend launched with concurrently
 
-### `start-ssrd`
+#### `start-ssrd`
 starts SSR (next.js) build bundle with both frontend + backend launched with concurrently (1100ms simulated delay)
 
-## CSR
-### `start-csr` 
+### CSR
+#### `start-csr` 
 starts CSR build bundle with both frontend + backend launched with concurrently
 
-### `start-csr-front`
+#### `start-csr-front`
 starts CSR frontend only
 
-## BE
-### `start-back` 
+### BE
+#### `start-back` 
 starts `json-server` API based on `todo.database.js`    
 
-## Task:
-##### Goal
+# Task:
+#### Goal
 
 Create a kickass TODO application.
 
-##### Feature requirements
+#### Feature requirements
 
 Application should support basic CRUD operations for todo lists.
 User should have an ability to view, add, remove, complete/uncomplete his todos;
 Todos should be saved to database of your choice
 (Refer http://todomvc.com/ as example)
 
-##### General Techical Requirements
+#### General Techical Requirements
 
 1. Application should support universal(isomorphic) rendering (Both on client and server)
 2. Backend code should be covered with functional tests. Client-side tests are plus.
