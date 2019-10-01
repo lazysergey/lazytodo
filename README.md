@@ -1,9 +1,9 @@
+## URLs
+- UI: http://localhost:3000
+- API: http://localhost:3333
+
 ## Available Scripts
-In the project directory after `npm install`, you can run scripts described below.
-
-UI URL: http://localhost:3000
-
-API URL: http://localhost:3333
+In the project directory after `npm install`, you can run scripts:
 
 ## SSR
 ### `start-ssr`
