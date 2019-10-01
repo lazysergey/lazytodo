@@ -38,5 +38,5 @@ Todos should be saved to database of your choice
 #### General Techical Requirements
 
 1. Application should support universal(isomorphic) rendering (Both on client and server)
-2. Backend code should be covered with functional tests. Client-side tests are plus.
+2. Client-side tests are plus.
 3. Should be a clear README, describing how to install dependencies, prepare infrastructure and launch application
